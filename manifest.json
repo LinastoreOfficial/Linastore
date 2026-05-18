@@ -3,19 +3,19 @@
   "name": "Lina Store | Your Lead Designer",
   "icons": [
     {
-      "src": "banner.linastore.jpg",
-      "type": "image/jpeg",
+      "src": "https://img.icons8.com/fluent/192/000000/gold-bars.png",
+      "type": "image/png",
       "sizes": "192x192",
       "purpose": "any"
     },
     {
-      "src": "banner.linastore.jpg",
-      "type": "image/jpeg",
+      "src": "https://img.icons8.com/fluent/512/000000/gold-bars.png",
+      "type": "image/png",
       "sizes": "512x512",
       "purpose": "any"
     }
   ],
-  "start_url": ".",
+  "start_url": "./index.html",
   "background_color": "#0A0A0A",
   "display": "standalone",
   "theme_color": "#0A0A0A",
