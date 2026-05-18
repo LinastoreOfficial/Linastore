@@ -1,6 +1,5 @@
 /**
- * Lina Store - Elegant PWA Solution
- * نافذة مدمجة احترافية تظهر للزائر في حال عناد المتصفح
+ * Lina Store - Standard PWA Installer
  */
 let deferredPrompt = null;
 const installBanner = document.getElementById('install-banner');
@@ -12,46 +11,40 @@ if ('serviceWorker' in navigator) {
   });
 }
 
-// 2. التقاط حدث التثبيت إذا سمح به المتصفح فوراً
+// 2. الاستماع لحدث الجاهزية من المتصفح
 window.addEventListener('beforeinstallprompt', (e) => {
   e.preventDefault();
   deferredPrompt = e;
+  console.log('App is ready for direct installation!');
 });
 
-// 3. عند الضغط على الزر الذهبي
+// 3. معالجة الضغط على الزر الذهبي
 if (installBanner) {
   installBanner.addEventListener('click', async () => {
     
-    // إذا وافق المتصفح وكان سريعاً، تظهر النافذة الرسمية فوراً
+    // إذا كان المتصفح جاهزاً وأطلق الحدث بالخلفية
     if (deferredPrompt) {
       deferredPrompt.prompt();
       const { outcome } = await deferredPrompt.userChoice;
-      if (outcome === 'accepted') installBanner.style.display = 'none';
+      if (outcome === 'accepted') {
+        installBanner.style.display = 'none';
+      }
       deferredPrompt = null;
     } 
-    // إذا عنَد المتصفح (وهذا الطبيعي)، نفتح النافذة الأنيقة المدمجة لكي لا يظهر أي خطأ
+    // إذا لم يطلق الحدث بعد أو كنا على نظام iOS (آيفون)
     else {
       showSmartModal();
     }
   });
 }
 
-// دالة إنشاء النافذة الاحترافية الفاخرة داخل الموقع
+// نافذة الدعم الإرشادية الفاخرة
 function showSmartModal() {
-  // منع تكرار إنشاء النافذة
   if (document.getElementById('pwa-smart-modal')) return;
-
   const isIOS = navigator.userAgent.match(/iPhone|iPad|iPod/i);
-  
   const modal = document.createElement('div');
   modal.id = 'pwa-smart-modal';
-  modal.style = `
-    position: fixed; top: 0; left: 0; width: 100%; height: 100%;
-    background: rgba(0,0,0,0.85); display: flex; justify-content: center;
-    align-items: center; z-index: 99999; font-family: 'Segoe UI', sans-serif;
-    opacity: 0; transition: opacity 0.3s ease; direction: rtl;
-  `;
-
+  modal.style = "position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.85); display: flex; justify-content: center; align-items: center; z-index: 99999; font-family: 'Segoe UI', sans-serif; opacity: 0; transition: opacity 0.3s ease; direction: rtl;";
   modal.innerHTML = `
     <div style="background: #111; border: 2px solid #D4AF37; width: 85%; max-width: 380px; padding: 25px; border-radius: 16px; text-align: center; box-shadow: 0 10px 30px rgba(212,175,55,0.2);">
       <h3 style="color: #D4AF37; margin-top: 0; font-size: 1.2rem;">📲 تثبيت تطبيق Lina Store</h3>
@@ -63,12 +56,15 @@ function showSmartModal() {
       <button id="close-pwa-modal" style="background: #D4AF37; color: #0A0A0A; border: none; padding: 10px 25px; border-radius: 8px; font-weight: bold; cursor: pointer; margin-top: 10px; width: 100%;">موافق، فهمت</button>
     </div>
   `;
-
   document.body.appendChild(modal);
   setTimeout(() => modal.style.opacity = '1', 50);
-
   document.getElementById('close-pwa-modal').addEventListener('click', () => {
     modal.style.opacity = '0';
     setTimeout(() => modal.remove(), 300);
   });
 }
+
+window.addEventListener('appinstalled', () => {
+  if (installBanner) installBanner.style.display = 'none';
+  deferredPrompt = null;
+});
