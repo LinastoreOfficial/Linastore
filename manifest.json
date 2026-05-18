@@ -3,15 +3,15 @@
   "name": "Lina Store | Your Lead Designer",
   "icons": [
     {
-      "src": "https://img.icons8.com/fluent/192/000000/gold-bars.png",
+      "src": "icon.png",
       "type": "image/png",
       "sizes": "192x192",
       "purpose": "any"
     },
     {
-      "src": "https://img.icons8.com/fluent/512/000000/gold-bars.png",
+      "src": "icon.png",
       "type": "image/png",
-      "sizes": "512x512",
+      "sizes": "768x768",
       "purpose": "any"
     }
   ],
