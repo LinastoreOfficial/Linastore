@@ -1,16 +1,21 @@
 {
-  "name": "Lina Store Official",
-  "short_name": "LinaStore",
-  "description": "Your Lead Designer - POD & Amazon Favorites",
-  "start_url": "index.html",
-  "display": "standalone",
-  "background_color": "#0A0A0A",
-  "theme_color": "#D4AF37",
+  "short_name": "Lina Store",
+  "name": "Lina Store | Your Lead Designer",
   "icons": [
     {
-      "src": "icon.png",
-      "sizes": "512x512",
-      "type": "image/png"
+      "src": "https://pwa-directory.com/images/web-app-manifest.png",
+      "type": "image/png",
+      "sizes": "192x192"
+    },
+    {
+      "src": "https://pwa-directory.com/images/web-app-manifest.png",
+      "type": "image/png",
+      "sizes": "512x512"
     }
-  ]
+  ],
+  "start_url": "./index.html",
+  "background_color": "#0A0A0A",
+  "display": "standalone",
+  "theme_color": "#0A0A0A",
+  "orientation": "portrait"
 }
